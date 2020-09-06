@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>catalogos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content>
+  <ion-row>
+    <ion-col>
+      <div class="card">
+        <form [formGroup]="productForm">
+          <div class="input-div one">
+            <ion-item>
+              <ion-label position="floating">Nombre Categoria</ion-label>
+              <ion-input formControlName="nombre"></ion-input>
+            </ion-item>
+          </div>
+          <br>
+          <ion-button size="large" style="width: 100%;" color="primary" (click)="send()"
+            [disabled]="!productForm.valid">Crear Categoria</ion-button>
+        </form>
+      </div>
+    </ion-col>
+    <!-- <ion-col>
+      <form [formGroup]="productForm2">
+        <div class="input-div one">
+          <ion-item>
+            <ion-label position="floating">Nombre Expansión</ion-label>
+            <ion-input formControlName="nombre"></ion-input>
+          </ion-item>
+        </div>
+        <br>
+
+        <ion-button size="large" style="width: 100%;" color="primary" (click)="send2()"
+          [disabled]="!productForm2.valid">Crear Expansión</ion-button>
+
+      </form>
+    </ion-col> -->
+  </ion-row>
+
+
+  <!-- <div class="gridclass">
+    <div class="itemcol" *ngFor="let item of catalogos">
+      <ion-checkbox [(ngModel)]="item.select"></ion-checkbox>
+      <h3>{{item.nombre}} </h3>  
+       <ion-fab horizontal="end" (click)="presentAlertConfirm(item)">
+        <ion-button>
+          <ion-icon name="trash-outline">
+          </ion-icon>
+        </ion-button>
+      </ion-fab> 
+      <hr>
+    </div>
+
+  </div> -->
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ion-item *ngFor="let item of catalogos" (click)="selectItem(item)" class="pointer">
+
+
+          <ion-label> {{item.nombre}}</ion-label>
+
+          <ion-fab horizontal="end" (click)="presentAlertConfirm(item)">
+            <ion-button>
+              <ion-icon name="trash-outline">
+              </ion-icon>
+            </ion-button>
+          </ion-fab>
+
+        </ion-item>
+      </div>
+
+      <div class="col">
+        <ng-container *ngIf="itemSelect">
+          <ion-label> {{itemSelect?.nombre}} Expansiones </ion-label>
+          <ul class="over">
+            <li *ngFor="let item2 of itemSelect?.colecccion;let i = index">
+              <div class="row">
+                <div class="col">
+                  <ion-input type="text" [(ngModel)]="item2.nombre"></ion-input>
+                </div>
+                <div class="col">
+                  <ion-button  (click)="actualizarDetalle()" >
+                    Actualizar
+                  </ion-button>
+                </div>
+                <div class="col">
+                  <ion-button (click)="borrarDetalles(i)">
+                    <ion-icon name="trash-outline" class="pointer icongrid"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+            </li>
+            <hr>
+          </ul>
+          <ion-item>
+            <ion-label position="floating">Ingrese nueva expansion</ion-label>
+            <ion-input type="text" [(ngModel)]="nuevaExp"></ion-input>
+          </ion-item>
+        
+          <ion-button (click)="actualizar()">
+            crear nueva expansiòn
+          </ion-button>
+        </ng-container>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+  <!-- </ion-list>
+    </ion-col> -->
+  <!-- <ion-col>
+      <ion-chip color="primary">
+        <ion-label>Seccion</ion-label>
+      </ion-chip> 
+ 
+      <ion-item *ngFor="let item of secciones" >
+        <ion-label> {{item.nombre}}</ion-label>
+        <ion-fab horizontal="end" (click)="presentAlertConfirm2(item)">
+          <ion-button>
+            <ion-icon name="trash-outline">
+            </ion-icon>
+          </ion-button>
+        </ion-fab>
+      </ion-item>
+ 
+    </ion-col> -->
+
+
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar no-border-top color="primary">
+    <ion-segment [(ngModel)]="tab" value="0">
+      <ion-segment-button (click)="goProductos()">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Productos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1" (click)="goAdmin()">
+        <ion-icon name="layers-outline"></ion-icon>
+        <ion-label>Admin</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2" (click)="goPreventas()">
+        <ion-icon name="pricetag-outline"></ion-icon>
+        <ion-label>Pre-ventas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="3" (click)="goEventos()">
+        <ion-icon name="trophy-outline"></ion-icon>
+        <ion-label>Eventos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Tu bolsa <ion-icon name="basket-outline" color="primary"></ion-icon>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrar()">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div  style="max-height: 400px;overflow-y: auto;">
+  <div class="container" *ngFor="let item of data" style="border-bottom: 1px solid gray;">
+  <div class="row magen" >
+    <div class="col " style="text-align: center;">
+      {{item.nombre}} <br>
+      <img [src]="item.foto" style="width: 50px;height: 70px" alt="image">
+    </div>
+    <div class="col">
+      <ion-icon name="remove-circle-outline" style="cursor: pointer;font-size: 25px;width: 25px;"
+        (click)="restaProducto(item)"> </ion-icon>
+      {{item.cantidad2}}
+      <ion-icon name="add-circle-outline" style="cursor: pointer;font-size: 25px;" (click)="sumaProducto(item)"></ion-icon>
+    </div>
+    <div class="col">
+      <p> $ {{   ((item.cantidad2)*(item.precio)).toLocaleString() }}</p>
+    </div>
+    <div class="col">
+      <ion-button (click)="presentAlertConfirm2(item)"> 
+        <ion-icon name="trash-outline">
+        </ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- <ion-content class="ion-padding">
+
+  <ion-list>
+    <ion-item >
+    <ion-label slot="end">
+    
+      </ion-label>
+
+      <ion-label slot="end">
+        <ion-fab horizontal="end" >
+         
+        </ion-fab>
+      </ion-label>
+
+
+
+    </ion-item>
+
+  </ion-list>
+
+
+
+
+</ion-content> -->
+
+
+<ion-footer>
+  <ion-item>
+    <ion-label slot="end">
+      <b color="primary">Total </b> <span style="color: red;">{{calTotal().toLocaleString()}} </span>
+
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-button color="success" (click)="cerrar()">
+      Seguir comprando
+    </ion-button>
+    <ion-button color="primary" (click)="continuar()">
+      Continuar con el pago
+    </ion-button>
+  </ion-item>
+
+</ion-footer>

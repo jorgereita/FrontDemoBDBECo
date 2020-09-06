@@ -1,0 +1,198 @@
+<ion-toolbar color="dark">
+
+  <ion-button shape="round" class="ion-padding" slot="secondary" (click)="go()" color="primary">
+    <ion-icon name="log-in-outline"></ion-icon> <span class="buttonRes">Ingreso </span>
+  </ion-button>
+
+  <ion-button shape="round" class="ion-padding" slot="secondary" (click)="irACompras()" color="primary">
+    <ion-icon name="basket-outline"></ion-icon> <span class="buttonRes">Bolsa</span>
+  </ion-button>
+  <ion-title>
+    <br>
+    UHC online store
+  </ion-title>
+  <ion-searchbar placeholder="Buscar en la tienda..."></ion-searchbar>
+
+
+
+</ion-toolbar>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="tab=='1'">
+  <a class="navbar-brand" href="#">Productos</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto" *ngIf="catalogos">
+
+      <li class="nav-item active" *ngFor="let item of catalogos;index as i" >
+        <ion-item >
+          <ion-label>{{item.nombre}}</ion-label>
+          <ion-select interface="popover" (ionChange)="onChangeFiltroCat($event)">
+            <ng-container *ngFor="let item2 of item.colecccion;index as j">
+              <ion-select-option [value]="item.id+'_'+j" > {{item2.nombre}} </ion-select-option>
+            </ng-container>
+            <!-- <ion-select-option value="-99"> limpiar </ion-select-option> -->
+          </ion-select>
+        </ion-item>
+      </li>
+    </ul>
+  </div>
+
+
+
+</nav>
+
+
+<ion-content>
+
+  <div [ngSwitch]="tab">
+    <ion-list *ngSwitchCase="'0'">
+
+
+      <div *ngIf="banners != []">
+
+
+        <ion-slides pager="true" [options]="slideOpts">
+          <ion-slide *ngFor="let item of banners;index as i">
+            <div>
+              <img class="d-block w-100" [src]="item.fotoBanner" alt="First slide">
+            </div>
+          </ion-slide>
+
+        </ion-slides>
+      </div>
+
+      <br>
+      <div style="width: 100%;text-align: center;">
+        <h1 class="text-uppercase">Bienvenido a Unlimited hobby center online store. </h1>
+        <hr>
+        <img src="../../assets/images/uhclogo.jpg" alt="" class="imgResponsive">
+        <br>
+        <h2>Encuentra todo lo relacionado a tus hobbys !</h2>
+        <br>
+      </div>
+
+
+
+
+    </ion-list>
+    <ion-list *ngSwitchCase="'1'">
+
+
+
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let item of productos">
+            <ion-card style="width: 300px;">
+              <ion-card-header>
+                <ion-card-title>{{item.nombre}}</ion-card-title>
+              </ion-card-header>
+
+              <ion-card-content>
+                <img [src]="item.foto" style="width: 300px;height: 300px" alt="image">
+                <p> <b>{{item.seccion}} </b> </p>
+                <p>{{item.descripcion}} </p>
+                <p><b>$ {{item.precio.toLocaleString()}}</b></p> <br>
+                <div *ngIf="item.cantidad!==0" class="parent">
+                  <div class="row">
+                    <div class="col"> Cantidad:</div>
+                    <div class="col">
+                      <ion-icon name="remove-circle-outline" style="cursor: pointer;font-size: 25px;"
+                        (click)="restaProducto(item)"></ion-icon>
+                    </div>
+                    <div class="col"> <input type="text" [(ngModel)]="item.cantidad2" style="width: 100%;"></div>
+                    <div class="col">
+                      <ion-icon name="add-circle-outline" style="cursor: pointer;font-size: 25px;"
+                        (click)="sumaProducto(item)"></ion-icon>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="width: 100%; text-align: center;" *ngIf="item.cantidad!==0">
+                  <ion-button size="large" color="secondary" (click)="agregarPbolsa(item)">A la bolsa</ion-button>
+                </div>
+                <div style="width: 100%; text-align: center;" *ngIf="item.cantidad==0">
+                  <ion-button size="large" color="warning">Sin stock</ion-button>
+                </div>
+              </ion-card-content>
+
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+
+
+    <ion-list *ngSwitchCase="'2'">
+
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let item of preventas;index as i">
+          <div>
+            <img [src]="item.foto" alt=" " style="height: 450px;width: 80%;">
+          </div>
+        </ion-slide>
+      </ion-slides>
+
+
+      <div class="container">
+        <h2>Proximos lanzamientos</h2>
+        <div class="line">
+          <p *ngFor="let item of preventas;index as i" class="pLine">
+            <b> {{item.fechaLanzamiento}} </b> : {{item.nombre}} <br>
+
+            {{item.Descripcion}}
+
+          </p>
+
+        </div>
+      </div>
+
+    </ion-list>
+    <ion-list *ngSwitchCase="'3'">
+      <div class="container">
+        <h2>Proximos Eventos</h2>
+        <div class="line">
+          <p *ngFor="let item of preventas;index as i" class="pLine">
+            <b> {{item.fechaLanzamiento}} </b> : {{item.nombre}} <br>
+
+            {{item.Descripcion}}
+
+          </p>
+
+        </div>
+      </div>
+    </ion-list>
+  </div>
+</ion-content>
+
+
+
+
+
+
+<ion-footer>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="tab" value="0">
+      <ion-segment-button value="0">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label class="buttonRes">Incio</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        <ion-icon name="pricetags-outline"></ion-icon>
+        <ion-label class="buttonRes">Productos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-icon name="timer-outline"></ion-icon>
+        <ion-label class="buttonRes">Pre-ventas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="3">
+        <ion-icon name="trophy-outline"></ion-icon>
+        <ion-label class="buttonRes">Eventos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

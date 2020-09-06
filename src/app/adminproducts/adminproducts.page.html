@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Creacion de productos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="row">
+    <div style="width: 99%;padding: 2%;">
+      <div class="card">
+        <form [formGroup]="productForm">
+          <div class="input-div one">
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input formControlName="nombre"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-div two">
+            <ion-item>
+              <ion-label position="floating">Categoria</ion-label>
+              <ion-select style="width: 100%;" formControlName="categoria" (ionChange)="onChangeCat($event)">
+                <ion-select-option *ngFor="let method of catalogos" [value]="method.id"  >{{ method.nombre}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+
+          <div class="input-div two">
+            <ion-item>
+              <ion-label position="floating">Expansion</ion-label>
+              <ion-select style="width: 100%;" formControlName="seccion">
+                <ion-select-option *ngFor="let method of secciones" [value]="method.nombre">{{ method.nombre}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+
+          <div class="input-div two">
+            <ion-item>
+              <ion-label position="floating">Cantidad</ion-label>
+              <ion-input type="number" formControlName="cantidad"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-div two">
+            <ion-item>
+              <ion-label position="floating">Precio unitario</ion-label>
+              <ion-input type="number" formControlName="precio"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-div two">
+            <ion-item>
+              <ion-label position="floating">Foto</ion-label>
+              <ion-input formControlName="foto"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-div two">
+            <ion-item>
+              <ion-label position="floating">Descripción</ion-label>
+              <ion-input formControlName="descripcion"></ion-input>
+            </ion-item>
+          </div>
+          <br>
+
+          <ion-button size="large" style="width: 100%;" color="primary" (click)="send()"
+            [disabled]="!productForm.valid">Crear Articulo</ion-button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+  <ion-row>
+    <ion-col *ngFor="let todo of todos">
+      <ion-card style="width: 320px;">
+        <ion-card-header>
+
+          <ion-card-title>
+            <ion-item >
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input color="primary" [(ngModel)]="todo.nombre"></ion-input>
+            </ion-item>
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <img [src]="todo.foto" width="100" height="100">
+          <br>
+          <p>{{todo.descripcion}}</p>
+          <ion-item>
+            <ion-label position="floating">Precio</ion-label>
+            <ion-input type="number" [(ngModel)]="todo.precio"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Cantidad en stock</ion-label>
+            <ion-input type="number" [(ngModel)]="todo.cantidad"></ion-input>
+          </ion-item>
+          <br><br><br>
+          
+          <ion-fab vertical="bottom" horizontal="end" (click)="presentAlertConfirm(todo)">
+            <ion-fab-button>
+              <ion-icon name="trash">
+              </ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+          <ion-fab vertical="bottom" (click)="presentAlertConfirm2(todo)">
+            <ion-fab-button>
+              <ion-icon name="reload">
+              </ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+
+  </ion-row>
+
+
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar no-border-top color="primary">
+    <ion-segment [(ngModel)]="tab" value="0">
+      <ion-segment-button (click)="goCategorias()">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Catalogos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1" (click)="goAdmin()">
+        <ion-icon name="layers-outline"></ion-icon>
+        <ion-label>Admin</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2" (click)="goPreventas()">
+        <ion-icon name="pricetag-outline"></ion-icon>
+        <ion-label>Pre-ventas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="3" (click)="goEventos()">
+        <ion-icon name="trophy-outline"></ion-icon>
+        <ion-label>Eventos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

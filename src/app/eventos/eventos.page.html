@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Eventos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <b>Crear o modificar los eventos. </b>
+  </ion-item>
+  <br>
+  <div class="card">
+    <form [formGroup]="productForm">
+      <div class="input-div one">
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Descripcion</ion-label>
+          <ion-textarea formControlName="Descripcion"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha del Evento</ion-label>
+          <ion-input formControlName="fechaEvento"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Lugar</ion-label>
+          <ion-input formControlName="Lugar" type="text"></ion-input>
+        </ion-item>
+        <!-- <ion-item>
+          <ion-label position="floating">foto</ion-label>
+          <ion-input formControlName="foto" type="text"></ion-input>
+        </ion-item> -->
+        <ion-item>
+          <ion-label position="floating">Link</ion-label>
+          <ion-input formControlName="Link"></ion-input>
+        </ion-item>
+      </div>
+      <br>
+      <ion-button size="large" style="width: 100%;" color="primary" (click)="send()" [disabled]="!productForm.valid">
+        Agregar eventos</ion-button>
+    </form>
+  </div>
+  <hr>
+  <ion-item>
+    <h2>eventos actuales</h2>
+  </ion-item>
+
+  <ion-row>
+    <ion-col *ngFor="let todo of todos">
+      <ion-card style="width: 320px;">
+
+        <ion-card-header>
+          <ion-card-title>
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input color="primary" [(ngModel)]="todo.nombre"></ion-input>
+            </ion-item>
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          
+          <br>
+          <ion-item>
+            <ion-label position="floating">Descripcion</ion-label>
+            <ion-textarea color="primary" [(ngModel)]="todo.Descripcion"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">fecha Evento</ion-label>
+            <ion-input type="text" [(ngModel)]="todo.fechaEvento"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Lugar </ion-label>
+            <ion-input type="text" [(ngModel)]="todo.Lugar"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Link </ion-label>
+            <ion-input type="text" [(ngModel)]="todo.Link"></ion-input>
+          </ion-item>
+          <br><br><br>
+
+          <ion-fab vertical="bottom" horizontal="end" (click)="presentAlertConfirm(todo)">
+            <ion-fab-button>
+              <ion-icon name="trash">
+              </ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+          <ion-fab vertical="bottom" (click)="presentAlertConfirm2(todo)">
+            <ion-fab-button>
+              <ion-icon name="reload">
+              </ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+
+
+
+        </ion-card-content>
+
+      </ion-card>
+    </ion-col>
+
+
+  </ion-row>
+
+</ion-content>
+
+
+
+
+<ion-footer>
+  <ion-toolbar no-border-top color="primary">
+    <ion-segment [(ngModel)]="tab" value="0">
+      <ion-segment-button (click)="goCategorias()">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Catalogos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1" (click)="goProductos()">
+        <ion-icon name="layers-outline"></ion-icon>
+        <ion-label>Productos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2" (click)="goAdmin()">
+        <ion-icon name="pricetag-outline"></ion-icon>
+        <ion-label>Admin</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="3" (click)="goEventos()">
+        <ion-icon name="trophy-outline"></ion-icon>
+        <ion-label>Eventos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

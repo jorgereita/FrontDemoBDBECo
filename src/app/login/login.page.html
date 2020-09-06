@@ -1,0 +1,33 @@
+ 
+<div class="body1">
+  <div class="login-page">
+    <div class="animated slideInUp form">
+      UHC ADMIN LOGIN <br>
+  
+      <form [formGroup]="loginForm" >
+
+        <h2>Bienvenido</h2><br>
+        <h5>Administrador</h5>
+       
+      
+          <div class="input-div one">
+            <ion-item>   
+              <ion-label position="floating">Usuario</ion-label>
+              <ion-input formControlName="email"></ion-input>
+            </ion-item>
+          </div>
+          <div class="input-div two">
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input formControlName="password" type="password"></ion-input>
+            </ion-item>
+          </div>
+          <br>
+          <!-- <a href="#">No se encuentra registrado ?</a> <br>
+          <a href="#">Olvido su contraseña ?</a> -->
+          <input class="btn" type="submit" value="Login" (click)="login()">
+       
+    </form>
+    </div>
+  </div>
+</div>

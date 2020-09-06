@@ -1,0 +1,26 @@
+ 
+
+
+
+ <ion-footer>
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="tab" value="0">
+      <ion-segment-button (click)="goCategorias()" >
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Incio</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        <ion-icon name="pricetags-outline"></ion-icon>
+        <ion-label>Productos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-icon name="pricetag-outline"></ion-icon>
+        <ion-label>Pre-ventas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="3">
+        <ion-icon name="trophy-outline"></ion-icon>
+        <ion-label>Eventos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

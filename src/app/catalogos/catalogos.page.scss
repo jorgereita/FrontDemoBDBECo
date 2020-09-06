@@ -1,0 +1,17 @@
+.gridclass {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5PX;
+    margin: 10px;
+    // background-color: DodgerBlue;
+  }
+  .pointer{
+      cursor: pointer;
+  }
+  .icongrid{
+      font-size: 25px;
+  }
+  .over{
+      max-height: 450px;
+      overflow-y: auto;
+  }

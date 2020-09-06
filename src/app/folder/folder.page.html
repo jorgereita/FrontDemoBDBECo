@@ -1,0 +1,47 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <div *ngIf="incial">
+      <div style="color:#859ea9">
+        <!-- <h1>Bienvenido a su quack login</h1> -->
+        <!-- <i>No tendra que volver a recordar su contraseña.</i> -->
+      </div>
+      <br>
+      <img src="https://desarrollo.portalintegrity.cloud/images/logoInt.png" alt="" width="auto" height="auto">
+      <ion-button expand="block" (click)="scan()">Autenticar</ion-button>
+    </div>
+    <div *ngIf="!incial">
+      <div *ngIf="result">
+        <div style="color:#859ea9">
+          <h1>Su autenticación ha sido exitosa!</h1>
+        </div>
+        <br>
+        <img src="../../assets/images/check.gif" alt="" width="auto" height="auto">
+        <ion-button expand="block" (click)="nuevoLogin()" color="success">Nuevo Login</ion-button>
+      </div>
+      <div *ngIf="!result">
+          <div style="color:#859ea9">
+            <h1>Error en atenticación intenta de nuevo.</h1>
+          </div>
+          <br>
+          <img src="../../assets/images/error.gif" alt="" width="auto" height="auto">
+          <ion-button expand="block" (click)="nuevoLogin()" color="success">Nuevo Login</ion-button>
+        </div>
+    </div>
+
+  </div>
+</ion-content>
